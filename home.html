@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>smartbooks</title>
+    <link rel="stylesheet" href="home.css">
+</head>
+<body>
+    <!-- Blockchain Background -->
+    <div class="blockchain-bg" id="blockchainBg"></div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()">🌙</button>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="logo" onclick="openAboutModal()"> SMARTBOOKS</div>
+            <div class="notification-bell" onclick="toggleNotifications()">
+                🔔
+                <span class="notification-badge" id="notificationBadge" style="display: none;">0</span>
+            </div>
+        </div>
+    </header>
+
+    <!-- Notification Panel -->
+    <div class="notification-panel" id="notificationPanel">
+        <div class="notification-header">
+            <h3>🔔 Notifikasi</h3>
+            <button class="mark-all-read" onclick="markAllAsRead()">Tandai Semua Sudah Dibaca</button>
+        </div>
+        <div class="notification-list" id="notificationList">
+            <!-- Notifications will be inserted here -->
+        </div>
+    </div>
+
+    <!-- About Modal -->
+    <div class="about-modal" id="aboutModal">
+        <div class="about-content">
+            <div class="about-header">
+                <h2>ABOUT SMARTBOOKS</h2>
+                <button class="close-modal" onclick="closeAboutModal()">×</button>
+            </div>
+            <div class="about-body" id="aboutBody">
+               <u><p>adalah platform media sosial berbasis hybrid model yang menggabungkan konsep web2 & web3</p></u>
+                <p>disini pengguna tidak hanya berkarya secara gratis, disini pengguna di monetisasi berkat karya karya yang mereka berikan serta kontribusi mereka terhadap smartbooks.</p>
+                <p>pengguna bisa memberikan konten edukasi, menjual konten, menjual documen, menjual music, </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" id="menuToggle" onclick="toggleMenu()">📱</button>
+
+    <!-- Overlay -->
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Left Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <h3>📱 Menu</h3>
+            <ul class="sidebar-menu">
+                <li onclick="location.href='../settings/settings.html'">⚙️ Settings</li>
+                <li onclick="location.href='../Profile/Profile.html'">👤 Profile</li>
+                <li onclick="location.href='../grup/grup.html'">👥 Grup</li>
+                <li onclick="location.href='../komunitas/komunitas.html'">🌐 Komunitas</li>
+                <li onclick="location.href='../marketplace/market.html'">🛒 Marketplace</li>
+                <li onclick="location.href='../NFT/NFT.html'">🎨 NFT Gallery</li>
+            </ul>
+        </aside>
+
+        <!-- Main Feed -->
+        <main class="feed-container">
+            <!-- Search Bar -->
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="🔍 Cari pengguna, grup, atau komunitas..." id="searchInput">
+            </div>
+
+            <!-- Feed Filter -->
+            <div class="feed-filter">
+                <button class="filter-btn active" onclick="filterFeed('all')">Semua</button>
+                <button class="filter-btn" onclick="filterFeed('text')">Tulisan</button>
+                <button class="filter-btn" onclick="filterFeed('media')">Media</button>
+                <button class="filter-btn" onclick="filterFeed('document')">Dokumen</button>
+                <button class="filter-btn" onclick="filterFeed('marketplace')">Marketplace</button>
+                <button class="filter-btn" onclick="filterFeed('nft')">NFT</button>
+            </div>
+
+            <!-- Feed Posts -->
+            <div class="feed-posts" id="feedPosts">
+                <!-- Feed Tulisan -->
+                <div class="feed-box" data-type="text">
+                    <h3>📝 Feed Tulisan</h3>
+                    <div class="feed-content" id="textFeed">
+                        <div class="empty-state">
+                            <p>Belum ada postingan teks</p>
+                        </div>
+                    </div>
+                    <div class="widget-section">
+                        <h4>🔥 Trending</h4>
+                        <div class="widget-content">Belum ada trending topics</div>
+                    </div>
+                </div>
+
+                <!-- Feed Foto -->
+                <div class="feed-box" data-type="media" data-subtype="photo">
+                    <h3>📷 Feed Foto</h3>
+                    <div class="feed-content" id="photoFeed">
+                        <div class="empty-state">
+                            <p>Belum ada foto</p>
+                        </div>
+                    </div>
+                    <div class="widget-section">
+                        <h4>💎 NFT Populer</h4>
+                        <div class="widget-content">Belum ada NFT populer</div>
+                    </div>
+                </div>
+
+                <!-- Feed Video -->
+                <div class="feed-box" data-type="media" data-subtype="video">
+                    <h3>🎥 Feed Video</h3>
+                    <div class="feed-content" id="videoFeed">
+                        <div class="empty-state">
+                            <p>Belum ada video</p>
+                        </div>
+                    </div>
+                    <div class="widget-section">
+                        <h4>💥 Saran Koneksi</h4>
+                        <div class="widget-content">Belum ada saran koneksi</div>
+                    </div>
+                </div>
+
+                <!-- Feed Dokumen -->
+                <div class="feed-box" data-type="document">
+                    <h3>📄 Feed Dokumen</h3>
+                    <div class="feed-content" id="documentFeed">
+                        <div class="empty-state">
+                            <p>Belum ada dokumen</p>
+                        </div>
+                    </div>
+                    <div class="widget-section">
+                        <h4>🔥 Trending</h4>
+                        <div class="widget-content">Belum ada trending topics</div>
+                    </div>
+                </div>
+
+                <!-- Feed Marketplace -->
+                <div class="feed-box" data-type="marketplace">
+                    <h3>🛒 Feed Marketplace</h3>
+                    <div class="feed-content" id="marketplaceFeed">
+                        <div class="empty-state">
+                            <p>Belum ada produk di marketplace</p>
+                        </div>
+                    </div>
+                    <div class="widget-section">
+                        <h4>💎 NFT Populer</h4>
+                        <div class="widget-content">Belum ada NFT populer</div>
+                    </div>
+                </div>
+
+                <!-- Feed NFT -->
+                <div class="feed-box" data-type="nft">
+                    <h3>🎨 Feed NFT</h3>
+                    <div class="feed-content" id="nftFeed">
+                        <div class="empty-state">
+                            <p>Belum ada NFT yang di-mint</p>
+                        </div>
+                    </div>
+                    <div class="widget-section">
+                        <h4>💥 Saran Koneksi</h4>
+                        <div class="widget-content">Belum ada saran koneksi</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="home.js"></script>
+</body>
+</html>
